@@ -1,6 +1,6 @@
 ﻿namespace ToolBX.MetaQuery;
 
-public record MetaQueryPredicate : IMetaQueryNode, IReadOnlyList<IMetaQueryNode>
+public sealed record MetaQueryPredicate : IMetaQueryNode, IReadOnlyList<IMetaQueryNode>
 {
     public IMetaQueryNode this[int index] => _nodes[index];
 
@@ -25,7 +25,7 @@ public record MetaQueryPredicate : IMetaQueryNode, IReadOnlyList<IMetaQueryNode>
         _nodes = nodes?.ToReadOnlyList() ?? throw new ArgumentNullException(nameof(nodes));
     }
 
-    public virtual bool Equals(MetaQueryPredicate? other)
+    public bool Equals(MetaQueryPredicate? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -39,5 +39,4 @@ public record MetaQueryPredicate : IMetaQueryNode, IReadOnlyList<IMetaQueryNode>
     public override string ToString() => _nodes.Any() ? $"({string.Join($" {Operator.GetDescription()} ", _nodes)})" : "*";
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
 }

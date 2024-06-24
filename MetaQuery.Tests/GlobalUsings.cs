@@ -1,7 +1,10 @@
-global using AutoFixture;
 global using FluentAssertions;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
-global using MetaQuery;
-global using ToolBX.Eloquentest;
+global using System.Linq.Expressions;
+global using ToolBX.DescriptiveEnums;
+global using ToolBX.Dummies;
+global using ToolBX.Dummies.Customizations;
 global using ToolBX.MetaQuery;
 global using ToolBX.MetaQuery.Resources;
+global using ToolBX.OPEX;
+global using WhiteJackalStudio.TestTools;

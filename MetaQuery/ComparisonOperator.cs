@@ -1,5 +1,6 @@
 ﻿namespace ToolBX.MetaQuery;
 
+[JsonConverter(typeof(ComparisonOperatorJsonConverter))]
 public enum ComparisonOperator
 {
     [Description("==")]

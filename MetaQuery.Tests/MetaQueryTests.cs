@@ -1,7 +1,7 @@
 ﻿namespace MetaQuery.Tests;
 
 [TestClass]
-public class MetaQueryTester
+public class MetaQueryTests
 {
     [TestClass]
     public class Predicate : Tester
@@ -23,7 +23,7 @@ public class MetaQueryTester
         public void WhenValueIsNotNull_SetValue()
         {
             //Arrange
-            var value = Fixture.Create<MetaQueryPredicate>();
+            var value = Dummy.Create<MetaQueryPredicate>();
 
             //Act
             var result = new ToolBX.MetaQuery.MetaQuery { Predicate = value };
@@ -53,7 +53,7 @@ public class MetaQueryTester
         public void WhenPredicateIsNotEmpty_ReturnFullWhereClause()
         {
             //Arrange
-            var query = Fixture.Create<ToolBX.MetaQuery.MetaQuery>();
+            var query = Dummy.Create<ToolBX.MetaQuery.MetaQuery>();
 
             //Act
             var result = query.ToString();

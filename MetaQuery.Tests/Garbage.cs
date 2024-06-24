@@ -1,6 +1,6 @@
 ﻿namespace MetaQuery.Tests;
 
-public record Person
+public sealed record Person
 {
     public int Id { get; init; }
     public string Name { get; init; } = string.Empty;
@@ -9,6 +9,6 @@ public record Person
     public IReadOnlyList<Hobby> Hobbies { get; init; } = Array.Empty<Hobby>();
 }
 
-public record Job(string Title, float Salary);
+public sealed record Job(string Title, float Salary);
 
-public record Hobby(string Name);
+public sealed record Hobby(string Name);

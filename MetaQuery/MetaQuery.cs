@@ -1,6 +1,6 @@
 ﻿namespace ToolBX.MetaQuery;
 
-public record MetaQuery
+public sealed record MetaQuery
 {
     public required MetaQueryPredicate Predicate
     {

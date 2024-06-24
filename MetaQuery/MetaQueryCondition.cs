@@ -1,6 +1,9 @@
-﻿namespace ToolBX.MetaQuery;
+﻿using ToolBX.Reflection4Humans.ValueEquality;
 
-public record MetaQueryCondition : IMetaQueryNode
+namespace ToolBX.MetaQuery;
+
+[JsonConverter(typeof(MetaQueryConditionConverter))]
+public sealed record MetaQueryCondition : IMetaQueryNode
 {
     public required string Field
     {
@@ -39,6 +42,10 @@ public record MetaQueryCondition : IMetaQueryNode
     private readonly object? _value;
 
     private readonly string _valueAsString = null!;
+
+    public bool Equals(MetaQueryCondition? other) => this.ValueEquals(other);
+
+    public override int GetHashCode() => this.GetValueHashCode();
 
     public override string ToString() => $"{Field} {Operator.GetDescription()} {_valueAsString}";
 }
