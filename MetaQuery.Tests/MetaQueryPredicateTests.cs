@@ -10,6 +10,7 @@ public class MetaQueryPredicateTests : RecordTester<MetaQueryPredicate>
     {
         base.InitializeTest();
         JsonSerializerOptions.Converters.Add(new MetaQueryConditionConverter());
+        JsonSerializerOptions.Converters.Add(new MetaQueryPredicateConverter());
 
         //var anus = JsonConvert.SerializeObject(Dummy.Create<MetaQueryPredicate>());
 

@@ -30,10 +30,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ToolBX.Collections.ReadOnly" Version="2.2.0" />
-		<PackageReference Include="ToolBX.DescriptiveEnums" Version="2.2.0" />
-		<PackageReference Include="ToolBX.Reflection4Humans.Extensions" Version="2.2.0" />
-		<PackageReference Include="ToolBX.Reflection4Humans.ValueEquality" Version="2.2.0" />
+		<PackageReference Include="ToolBX.Collections.ReadOnly" Version="3.0.0-beta1" />
+		<PackageReference Include="ToolBX.DescriptiveEnums" Version="3.0.0-beta1" />
+		<PackageReference Include="ToolBX.Reflection4Humans.Extensions" Version="3.0.0-beta5" />
+		<PackageReference Include="ToolBX.Reflection4Humans.ValueEquality" Version="3.0.0-beta5" />
 	</ItemGroup>
 
 	<ItemGroup>
