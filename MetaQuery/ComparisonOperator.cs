@@ -1,5 +1,6 @@
-﻿namespace ToolBX.MetaQuery;
+namespace ToolBX.MetaQuery;
 
+[JsonConverter(typeof(JsonStringEnumConverter<ComparisonOperator>))]
 public enum ComparisonOperator
 {
     [Description("==")]
@@ -14,35 +15,19 @@ public enum ComparisonOperator
     GreaterThanOrEquals,
     [Description("<=")]
     LessThanOrEquals,
+    /// <summary>
+    /// The (scalar) field's value is one of the values in the supplied collection.
+    /// </summary>
     [Description("IS IN")]
     IsIn,
+    /// <summary>
+    /// The (scalar) field's value is not one of the values in the supplied collection.
+    /// </summary>
     [Description("IS NOT IN")]
-    IsNotIn
-}
-
-internal static class ComparisonOperatorExtensions
-{
-    internal static BinaryExpression ToBinaryExpression(this ComparisonOperator value, Expression left, ConstantExpression right)
-    {
-        if (left == null) throw new ArgumentNullException(nameof(left));
-        if (right == null) throw new ArgumentNullException(nameof(right));
-
-        switch (value)
-        {
-            case ComparisonOperator.Equals:
-                return Expression.Equal(left, right);
-            case ComparisonOperator.NotEquals:
-                return Expression.NotEqual(left, right);
-            case ComparisonOperator.GreaterThan:
-               return Expression.GreaterThan(left, right);
-            case ComparisonOperator.GreaterThanOrEquals:
-                return Expression.GreaterThanOrEqual(left, right);
-            case ComparisonOperator.LessThan:
-                return Expression.LessThan(left, right);
-            case ComparisonOperator.LessThanOrEquals:
-                return Expression.LessThanOrEqual(left, right);
-            default:
-                throw new NotSupportedException(string.Format(Exceptions.ComparisonOperatorUnsupported, value));
-        }
-    }
+    IsNotIn,
+    /// <summary>
+    /// The field is itself a collection and contains the supplied (scalar) value.
+    /// </summary>
+    [Description("CONTAINS")]
+    Contains
 }

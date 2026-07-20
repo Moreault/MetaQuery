@@ -1,6 +1,7 @@
-﻿namespace ToolBX.MetaQuery;
+namespace ToolBX.MetaQuery;
 
-public record MetaQueryCondition : IMetaQueryNode
+[JsonConverter(typeof(MetaQueryConditionConverter))]
+public sealed class MetaQueryCondition : IEquatable<MetaQueryCondition>
 {
     public required string Field
     {
@@ -20,25 +21,31 @@ public record MetaQueryCondition : IMetaQueryNode
     }
     private readonly ComparisonOperator _operator;
 
-    public required object? Value
+    public required object? Value { get; init; }
+
+    public MetaQueryCondition Clone() => new()
     {
-        get => _value;
-        init
-        {
-            _value = value;
-            if (value is null) _valueAsString = "NULL";
-            else
-            {
-                var valueString = value.ToString()!;
-                if (string.IsNullOrEmpty(valueString))
-                    valueString = @"""";
-                _valueAsString = valueString;
-            }
-        }
+        Field = Field,
+        Operator = Operator,
+        Value = Value
+    };
+
+    public bool Equals(MetaQueryCondition? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return string.Equals(_field, other._field, StringComparison.Ordinal) &&
+               _operator == other._operator &&
+               Equals(Value, other.Value);
     }
-    private readonly object? _value;
 
-    private readonly string _valueAsString = null!;
+    public override bool Equals(object? obj) => Equals(obj as MetaQueryCondition);
 
-    public override string ToString() => $"{Field} {Operator.GetDescription()} {_valueAsString}";
+    public override int GetHashCode() => HashCode.Combine(_field, (int)_operator, Value);
+
+    public static bool operator ==(MetaQueryCondition? a, MetaQueryCondition? b) => a is null && b is null || a is not null && a.Equals(b);
+
+    public static bool operator !=(MetaQueryCondition? a, MetaQueryCondition? b) => !(a == b);
+
+    public override string ToString() => $"{Field} {Operator.GetDescription()} {Value ?? "NULL"}";
 }
